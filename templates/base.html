@@ -4,62 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Product Manager{% endblock %}</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Combined CSS (Vistiqx Theme + Custom Styles) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ range(1, 10000) | random }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Product Manager</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">
+    <!-- Floating elements for visual interest -->
+    <div class="floating-element one"></div>
+    <div class="floating-element two"></div>
+
+    <header>
+        <div class="container header-content">
+            <a href="{{ url_for('index') }}" class="logo">Product <span>Manager</span></a>
+            <nav>
+                <ul>
+                    <li>
+                        <a class="{% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">
                             <i class="fas fa-home"></i> Home
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'products' %}active{% endif %}" href="{{ url_for('products') }}">
+                    <li>
+                        <a class="{% if request.endpoint == 'products' %}active{% endif %}" href="{{ url_for('products') }}">
                             <i class="fas fa-box"></i> Products
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'collections' %}active{% endif %}" href="{{ url_for('collections') }}">
+                    <li>
+                        <a class="{% if request.endpoint == 'collections' %}active{% endif %}" href="{{ url_for('collections') }}">
                             <i class="fas fa-layer-group"></i> Collections
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'tags' %}active{% endif %}" href="{{ url_for('tags') }}">
+                    <li>
+                        <a class="{% if request.endpoint == 'tags' %}active{% endif %}" href="{{ url_for('tags') }}">
                             <i class="fas fa-tags"></i> Tags
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'env_vars' %}active{% endif %}" href="{{ url_for('env_vars') }}">
-                            <i class="fas fa-cogs"></i> Environment Variables
+                    <li>
+                        <a class="{% if request.endpoint == 'env_vars' %}active{% endif %}" href="{{ url_for('env_vars') }}">
+                            <i class="fas fa-cogs"></i> Environment
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'stores' %}active{% endif %}" href="{{ url_for('stores') }}">
+                    <li>
+                        <a class="{% if request.endpoint == 'stores' %}active{% endif %}" href="{{ url_for('stores') }}">
                             <i class="fas fa-store"></i> Stores
                         </a>
                     </li>
                 </ul>
-            </div>
+            </nav>
             
-            <div class="ms-auto d-flex align-items-center">
-                <div class="btn-group">
-                    {% set stores = get_all_stores() %}
-                    {% if stores %}
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-store"></i> 
+            <div class="store-selector">
+                {% set stores = get_all_stores() %}
+                {% if stores %}
+                    <div class="dropdown">
+                        <button type="button" class="cta-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-store"></i>
                             {% if current_store %}
                                 {{ current_store.name }}
                             {% else %}
@@ -69,7 +74,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             {% for store in stores %}
                                 <li>
-                                    <a class="dropdown-item {% if current_store and current_store.id == store.id %}active{% endif %}" 
+                                    <a class="dropdown-item {% if current_store and current_store.id == store.id %}active{% endif %}"
                                        href="{{ url_for('set_current_store_route', id=store.id) }}">
                                         {% if current_store and current_store.id == store.id %}
                                             <i class="fas fa-check me-2"></i>
@@ -83,34 +88,39 @@
                             <li><a class="dropdown-item" href="{{ url_for('stores') }}"><i class="fas fa-cog me-2"></i> Manage Stores</a></li>
                             <li><a class="dropdown-item" href="{{ url_for('add_store') }}"><i class="fas fa-plus me-2"></i> Add New Store</a></li>
                         </ul>
-                    {% else %}
-                        <a href="{{ url_for('add_store') }}" class="btn btn-primary">
-                            <i class="fas fa-store"></i> Set Up Store
-                        </a>
-                    {% endif %}
-                </div>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('add_store') }}" class="cta-button">
+                        <i class="fas fa-store"></i> Set Up Store
+                    </a>
+                {% endif %}
             </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="container mt-4">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    <div class="main-content">
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 
-        {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div>
     </div>
 
-    <footer class="bg-dark text-white mt-5 py-3">
-        <div class="container text-center">
-            <p>Product Manager with Claude 3.7 Integration</p>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Product Manager with Claude 3.7 Integration</p>
+                <p>&copy; 2025 Shopify Automation</p>
+            </div>
         </div>
     </footer>
 

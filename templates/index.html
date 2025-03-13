@@ -1,72 +1,79 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Product Manager{% endblock %}
+{% block title %}Home - Shopify Product Manager{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <h1 class="section-heading">Product Manager Dashboard</h1>
+        <h1 class="section-heading">Shopify Automation Dashboard</h1>
         
         <!-- Debug Store Information -->
         <div class="alert alert-info">
             <h4>Debug Store Information</h4>
             <p>Current Store: {{ current_store.name if current_store else 'None' }}</p>
-            <p>All Stores: 
+            <p>All Stores:
                 {% for store in get_all_stores() %}
-                    {{ store.name }} (ID: {{ store.id }}), 
+                    {{ store.name }} (ID: {{ store.id }}),
                 {% endfor %}
             </p>
             <p>Total Stores: {{ get_all_stores()|length }}</p>
         </div>
-        
         {% if not products %}
         <div class="empty-state">
             <i class="fas fa-box-open"></i>
             <h3>No Products Yet</h3>
             <p>Get started by adding your first product.</p>
-            <a href="{{ url_for('add_product') }}" class="btn btn-primary">
+            <a href="{{ url_for('add_product') }}" class="cta-button">
                 <i class="fas fa-plus"></i> Add Product
             </a>
         </div>
         {% else %}
         <div class="row mb-4">
             <div class="col-md-3">
-                <div class="card bg-primary text-white">
-                    <div class="card-body">
+                <div class="card">
+                    <div class="card-header bg-primary">
                         <h5 class="card-title">Products</h5>
-                        <p class="card-text display-4">{{ products|length }}</p>
-                        <a href="{{ url_for('products') }}" class="btn btn-light btn-sm">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <p class="bento-stat">{{ products|length }}</p>
+                        <a href="{{ url_for('products') }}" class="btn btn-outline-primary btn-sm">View All</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card bg-success text-white">
-                    <div class="card-body">
+                <div class="card">
+                    <div class="card-header bg-success">
                         <h5 class="card-title">Collections</h5>
-                        <p class="card-text display-4">{{ collections|length }}</p>
-                        <a href="{{ url_for('collections') }}" class="btn btn-light btn-sm">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <p class="bento-stat">{{ collections|length }}</p>
+                        <a href="{{ url_for('collections') }}" class="btn btn-outline-success btn-sm">View All</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card bg-info text-white">
-                    <div class="card-body">
+                <div class="card">
+                    <div class="card-header bg-info">
                         <h5 class="card-title">Tags</h5>
+                    </div>
+                    <div class="card-body">
                         {% set tag_count = namespace(value=0) %}
                         {% for product in products %}
                             {% set tag_count.value = tag_count.value + product.tags|length %}
                         {% endfor %}
-                        <p class="card-text display-4">{{ tag_count.value }}</p>
-                        <a href="{{ url_for('tags') }}" class="btn btn-light btn-sm">View All</a>
+                        <p class="bento-stat">{{ tag_count.value }}</p>
+                        <a href="{{ url_for('tags') }}" class="btn btn-outline-info btn-sm">View All</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card bg-warning text-dark">
-                    <div class="card-body">
+                <div class="card">
+                    <div class="card-header bg-warning">
                         <h5 class="card-title">Environment Variables</h5>
+                    </div>
+                    <div class="card-body">
                         <p class="card-text">Manage your environment variables</p>
-                        <a href="{{ url_for('env_vars') }}" class="btn btn-dark btn-sm">Manage</a>
+                        <a href="{{ url_for('env_vars') }}" class="btn btn-outline-warning btn-sm">Manage</a>
                     </div>
                 </div>
             </div>
@@ -75,7 +82,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Recent Products</h5>
                             {% if current_store %}
@@ -111,7 +118,7 @@
             
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header bg-success text-white">
+                    <div class="card-header bg-success">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Recent Collections</h5>
                             {% if current_store %}
@@ -143,7 +150,7 @@
                         {% else %}
                         <div class="text-center py-4">
                             <p>No collections yet.</p>
-                            <a href="{{ url_for('add_collection') }}" class="btn btn-success btn-sm">
+                            <a href="{{ url_for('add_collection') }}" class="cta-button">
                                 <i class="fas fa-plus"></i> Create Collection
                             </a>
                         </div>
@@ -156,7 +163,7 @@
         <div class="row mt-4">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-dark text-white">
+                    <div class="card-header bg-dark">
                         <h5 class="mb-0">Quick Actions</h5>
                     </div>
                     <div class="card-body">
@@ -213,7 +220,7 @@
                     <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Claude API Key Not Set</h4>
                     <p>To enable automatic product tagging with Claude 3.7, you need to set your Anthropic API key.</p>
                     <hr>
-                    <a href="{{ url_for('env_vars') }}" class="btn btn-warning">
+                    <a href="{{ url_for('env_vars') }}" class="cta-button">
                         <i class="fas fa-cogs"></i> Configure Environment Variables
                     </a>
                 </div>
@@ -224,7 +231,7 @@
                     <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Shopify Integration Not Configured</h4>
                     <p>To enable Shopify integration for importing and exporting products and collections, you need to set up your Shopify credentials.</p>
                     <hr>
-                    <a href="{{ url_for('env_vars') }}" class="btn btn-warning">
+                    <a href="{{ url_for('env_vars') }}" class="cta-button">
                         <i class="fas fa-cogs"></i> Configure Environment Variables
                     </a>
                 </div>

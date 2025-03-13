@@ -5,25 +5,25 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="section-heading">Stores</h1>
-            <div>
-                <a href="{{ url_for('add_store') }}" class="btn btn-primary">
+        <div class="mb-4">
+            <h1 class="section-heading mb-3">Stores</h1>
+            <div class="button-container">
+                <a href="{{ url_for('add_store') }}" class="cta-button">
                     <i class="fas fa-plus"></i> Add Store
                 </a>
             </div>
         </div>
         
         {% if current_store %}
-        <div class="alert alert-info">
-            <h5><i class="fas fa-info-circle"></i> Current Store</h5>
-            <p>You are currently viewing data for: <strong>{{ current_store.name }}</strong> ({{ current_store.url }})</p>
+        <div class="alert alert-info" style="background: rgba(172, 143, 254, 0.1); border-color: rgba(172, 143, 254, 0.3); color: var(--white);">
+            <h5 style="color: var(--white);"><i class="fas fa-info-circle"></i> Current Store</h5>
+            <p style="color: var(--white);">You are currently viewing data for: <strong>{{ current_store.name }}</strong> ({{ current_store.url }})</p>
         </div>
         {% endif %}
         
         {% if stores %}
         <div class="card mb-4">
-            <div class="card-header bg-light">
+            <div class="card-header bg-primary text-white" style="background: var(--purple-light) !important;">
                 <h5 class="mb-0">Store List</h5>
             </div>
             <div class="card-body">
@@ -41,8 +41,13 @@
                         </thead>
                         <tbody>
                             {% for store in stores %}
-                            <tr {% if current_store and current_store.id == store.id %}class="table-primary"{% endif %}>
-                                <td>{{ store.name }}</td>
+                            <tr>
+                                <td>
+                                    {{ store.name }}
+                                    {% if current_store and current_store.id == store.id %}
+                                    <span class="badge bg-primary ms-2">Current</span>
+                                    {% endif %}
+                                </td>
                                 <td>{{ store.url }}</td>
                                 <td>{{ store.products|length }}</td>
                                 <td>{{ store.collections|length }}</td>
@@ -73,11 +78,33 @@
             <i class="fas fa-store"></i>
             <h3>No Stores Yet</h3>
             <p>Get started by adding your first store.</p>
-            <a href="{{ url_for('add_store') }}" class="btn btn-primary">
+            <a href="{{ url_for('add_store') }}" class="cta-button">
                 <i class="fas fa-plus"></i> Add Store
             </a>
         </div>
         {% endif %}
+        
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white" style="background: var(--purple-light) !important;">
+                <h5 class="mb-0">About Stores</h5>
+            </div>
+            <div class="card-body">
+                <p style="color: var(--white);">Stores represent different Shopify storefronts that you can manage through this application.</p>
+                
+                <h6 class="mt-4" style="color: var(--white);">Store Features:</h6>
+                <ul style="color: var(--white);">
+                    <li>Manage multiple Shopify stores in one place</li>
+                    <li>Import and export products and collections</li>
+                    <li>Organize products by store</li>
+                    <li>Switch between stores easily</li>
+                </ul>
+                
+                <div class="alert alert-info mt-3" style="background: rgba(172, 143, 254, 0.1); border-color: rgba(172, 143, 254, 0.3); color: var(--white);">
+                    <h6 style="color: var(--white);"><i class="fas fa-lightbulb"></i> Tip</h6>
+                    <p style="color: var(--white);">Use the "Select" button to switch between stores. The currently selected store is highlighted in the store list.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

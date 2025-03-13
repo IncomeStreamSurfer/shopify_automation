@@ -1,10 +1,1121 @@
-/* Custom styles for Product Manager */
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('https://cdn.jsdelivr.net/gh/madebyfabian/NeueMontreal-Font@1.0.0/fonts/NeueMontreal-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('https://cdn.jsdelivr.net/gh/madebyfabian/NeueMontreal-Font@1.0.0/fonts/NeueMontreal-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('https://cdn.jsdelivr.net/gh/madebyfabian/NeueMontreal-Font@1.0.0/fonts/NeueMontreal-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --purple-light: #AC8FFE;
+    --purple-dark: #8A6FD6;
+    --dark-blue: #12264F;
+    --black: #121212;
+    --white: #E8E8F8;
+    --gray: #6E6E80;
+    --card-radius: 24px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
+    font-family: 'Neue Montreal', 'Inter', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header, .navbar {
+    padding: 24px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.header-content, .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo, .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.logo span, .navbar-brand span {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav ul, .navbar-nav {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+}
+
+nav ul li a, .nav-link {
+    color: var(--white) !important;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    opacity: 0.8;
+}
+
+nav ul li a:hover, .nav-link:hover {
+    opacity: 1;
+}
+
+.nav-link.active {
+    opacity: 1;
+    color: var(--purple-light) !important;
+}
+
+.cta-button, .btn-primary {
+    display: inline-block;
+    padding: 4px 10px;
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+    color: var(--white) !important;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: var(--transition);
+    border: none;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.cta-button i, .btn-primary i {
+    font-size: 0.75rem;
+    position: relative;
+    top: -1px;
+}
+
+/* Smaller buttons for empty state sections */
+.empty-state .cta-button,
+.empty-state .btn-primary,
+.empty-state .btn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+.cta-button:hover, .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(172, 143, 254, 0.3);
+}
+
+/* Main Content Area */
+.main-content {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--black) 0%, rgba(18, 18, 18, 0.98) 100%);
+    flex: 1;
+}
+
+/* Card Styles */
+.card {
+    background: rgba(25, 25, 25, 0.8);
+    border-radius: var(--card-radius);
+    padding: 30px;
+    padding-top: 40px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(172, 143, 254, 0.1);
+    margin-bottom: 24px;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(172, 143, 254, 0.3);
+    border-color: rgba(172, 143, 254, 0.5);
+    background: rgba(30, 30, 35, 0.9);
+}
+
+.card-header {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+    color: var(--white);
+    border-radius: var(--card-radius) var(--card-radius) 0 0;
+    padding: 16px 24px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+/* Section Headings */
+.section-heading {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: fit-content;
+    height: 2px;
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label, label, .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--white) !important;
+}
+
+.form-text, .form-check-label, small, .small {
+    color: var(--gray) !important;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(18, 18, 18, 0.8) !important;
+    border: 1px solid rgba(172, 143, 254, 0.2) !important;
+    border-radius: 8px;
+    color: var(--white) !important;
+    font-size: 1rem;
+    font-family: 'Neue Montreal', 'Inter', sans-serif;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--purple-light) !important;
+    box-shadow: 0 0 0 2px rgba(172, 143, 254, 0.2) !important;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Fix for form labels and text in pop-up windows */
+.modal-content, .card, form {
+    color: var(--white) !important;
+}
+
+.modal-content label, .card label, form label,
+.modal-content .form-label, .card .form-label, form .form-label {
+    color: var(--white) !important;
+}
+
+.modal-content .text-muted, .card .text-muted, form .text-muted,
+.modal-content small, .card small, form small {
+    color: var(--gray) !important;
+}
+
+/* Fix for form placeholders */
+::placeholder {
+    color: rgba(232, 232, 248, 0.5) !important;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: rgba(232, 232, 248, 0.5) !important;
+}
+
+::-ms-input-placeholder {
+    color: rgba(232, 232, 248, 0.5) !important;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: var(--transition);
+    font-family: 'Neue Montreal', 'Inter', sans-serif;
+    border: none;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(172, 143, 254, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(110, 110, 128, 0.2);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(110, 110, 128, 0.3);
+}
+
+.btn-success {
+    background: linear-gradient(90deg, #4CAF50, #2E7D32);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(90deg, #F44336, #C62828);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.3);
+}
+
+.btn-warning {
+    background: linear-gradient(90deg, #FFC107, #FF8F00);
+    color: var(--black);
+    transition: var(--transition);
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+}
+
+.btn-info {
+    background: linear-gradient(90deg, #03A9F4, #0288D1);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.btn-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(3, 169, 244, 0.3);
+}
+
+.btn-dark {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid var(--gray);
+    transition: var(--transition);
+}
+
+.btn-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(18, 18, 18, 0.3);
+}
+
+.btn-light {
+    background: var(--white);
+    color: var(--black);
+    transition: var(--transition);
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(232, 232, 248, 0.3);
+}
+
+.btn-outline-primary {
+    background: transparent;
+    border: 2px solid var(--purple-light);
+    color: var(--purple-light);
+    transition: var(--transition);
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark));
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(172, 143, 254, 0.3);
+    border-color: transparent; /* Remove border on hover to avoid color mismatch */
+}
+
+.btn-outline-success {
+    background: transparent;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    transition: var(--transition);
+}
+
+.btn-outline-success:hover {
+    background: linear-gradient(90deg, #4CAF50, #2E7D32);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.btn-outline-info {
+    background: transparent;
+    border: 2px solid #03A9F4;
+    color: #03A9F4;
+    transition: var(--transition);
+}
+
+.btn-outline-info:hover {
+    background: linear-gradient(90deg, #03A9F4, #0288D1);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(3, 169, 244, 0.3);
+}
+
+.btn-outline-warning {
+    background: transparent;
+    border: 2px solid #FFC107;
+    color: #FFC107;
+    transition: var(--transition);
+}
+
+.btn-outline-warning:hover {
+    background: linear-gradient(90deg, #FFC107, #FF8F00);
+    color: var(--black);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+}
+
+.btn-outline-danger {
+    background: transparent;
+    border: 2px solid #F44336;
+    color: #F44336;
+    transition: var(--transition);
+}
+
+.btn-outline-danger:hover {
+    background: linear-gradient(90deg, #F44336, #C62828);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.3);
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: var(--card-radius);
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    border: 1px solid transparent;
+}
+
+.alert-success {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.3);
+    color: #4CAF50;
+}
+
+.alert-success .btn-close {
+    color: #2E7D32 !important;
+    filter: none !important;
+    opacity: 0.8;
+}
+
+.alert-danger {
+    background: rgba(244, 67, 54, 0.1);
+    border-color: rgba(244, 67, 54, 0.3);
+    color: #F44336;
+}
+
+.alert-danger .btn-close {
+    color: #C62828 !important;
+    filter: none !important;
+    opacity: 0.8;
+}
+
+.alert-warning {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: rgba(255, 193, 7, 0.3);
+    color: #FFC107;
+}
+
+.alert-warning .btn-close {
+    color: #FF8F00 !important;
+    filter: none !important;
+    opacity: 0.8;
+}
+
+.alert-info {
+    background: rgba(3, 169, 244, 0.1);
+    border-color: rgba(3, 169, 244, 0.3);
+    color: #03A9F4;
+}
+
+.alert-info .btn-close {
+    color: #0288D1 !important;
+    filter: none !important;
+    opacity: 0.8;
+}
+
+/* Fix for Bootstrap close button */
+.btn-close {
+    background: transparent !important;
+    opacity: 0.9;
+    font-size: 2rem !important;
+    font-weight: bold;
+    filter: none !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 8px !important;
+    line-height: 1 !important;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.btn-close::before {
+    content: "×";
+    display: inline-block;
+}
+
+/* Override Bootstrap's default close button styling */
+.btn-close:focus {
+    box-shadow: none !important;
+    opacity: 1;
+}
+
+/* Make alert close buttons more visible */
+.alert {
+    position: relative;
+}
+
+.alert .btn-close {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+.alert-success .btn-close {
+    text-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
+}
+
+.alert-danger .btn-close {
+    text-shadow: 0 0 5px rgba(198, 40, 40, 0.5);
+}
+
+.alert-warning .btn-close {
+    text-shadow: 0 0 5px rgba(255, 143, 0, 0.5);
+}
+
+.alert-info .btn-close {
+    text-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.bg-primary {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark)) !important;
+}
+
+.bg-success {
+    background: linear-gradient(90deg, #4CAF50, #2E7D32) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(90deg, #F44336, #C62828) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(90deg, #FFC107, #FF8F00) !important;
+}
+
+.bg-info {
+    background: linear-gradient(90deg, #03A9F4, #0288D1) !important;
+}
+
+.bg-secondary {
+    background: var(--gray) !important;
+}
+
+.bg-dark {
+    background: var(--black) !important;
+}
+
+.bg-light {
+    background: var(--white) !important;
+}
+
+/* List Group Styles */
+.list-group {
+    border-radius: var(--card-radius);
+    overflow: hidden;
+}
+
+.list-group-item {
+    background: rgba(25, 25, 25, 0.8);
+    border: 1px solid rgba(172, 143, 254, 0.1);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.list-group-item:hover {
+    background: rgba(30, 30, 35, 0.9);
+    border-color: rgba(172, 143, 254, 0.5);
+}
+
+.list-group-item-action {
+    color: var(--white);
+}
+
+/* Dropdown Styles */
+.dropdown-menu {
+    background: rgba(25, 25, 25, 0.95);
+    border: 1px solid rgba(172, 143, 254, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    padding: 16px;
+}
+
+.dropdown-item {
+    color: var(--white);
+    transition: var(--transition);
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.dropdown-item:hover {
+    background: rgba(172, 143, 254, 0.1);
+    color: var(--purple-light);
+}
+
+.dropdown-divider {
+    border-color: rgba(172, 143, 254, 0.2);
+}
+
+/* Footer Styles */
+footer {
+    padding: 40px 0 20px;
+    background: rgba(18, 18, 18, 0.95);
+    border-top: 1px solid rgba(172, 143, 254, 0.1);
+    margin-top: auto;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+/* Preserve existing functionality styles */
+.tag-badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+}
+
+.product-image {
+    height: 200px;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-load {
+    opacity: 0;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+.collection-card {
+    border-left: 5px solid var(--purple-light);
+}
+
+.env-var-key {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.env-var-value {
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.action-buttons {
+    white-space: nowrap;
+}
+
+.btn-icon {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+}
+
+.product-count-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.required-field::after {
+    content: "*";
+    color: #F44336;
+    margin-left: 4px;
+}
+
+.checkbox-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid rgba(172, 143, 254, 0.2);
+    border-radius: 8px;
+    padding: 0.5rem;
+    background: rgba(18, 18, 18, 0.8);
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag-item {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: rgba(172, 143, 254, 0.1);
+    border-radius: 50px;
+    font-size: 0.875rem;
+}
+
+.tag-item .remove-tag {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #F44336;
+}
+
+.tag-item .remove-tag:hover {
+    color: #C62828;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: rgba(35, 35, 40, 0.9);
+    border-radius: var(--card-radius);
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(172, 143, 254, 0.1);
+    color: var(--white);
+}
+
+.empty-state h3 {
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+}
+
+/* Table Styles */
+.table {
+    color: var(--white);
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    background: rgba(25, 25, 25, 0.8);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+}
+
+.table th {
+    background: rgba(172, 143, 254, 0.2);
+    padding: 12px 16px;
+    font-weight: 600;
+    text-align: left;
+    color: var(--white);
+    border-bottom: 1px solid rgba(172, 143, 254, 0.3);
+}
+
+.table td {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(172, 143, 254, 0.1);
+    color: var(--white);
+    background-color: rgba(30, 30, 35, 0.7);
+}
+
+.table tbody tr {
+    transition: var(--transition);
+    background: rgba(30, 30, 35, 0.7);
+}
+
+.table tbody tr:nth-child(odd) {
+    background: rgba(25, 25, 25, 0.9);
+}
+.table tbody tr:hover {
+    /* Remove background color change */
+    background: transparent !important;
+    color: var(--white) !important;
+}
+
+/* Override Bootstrap table styles */
+.table-hover tbody tr:hover {
+    /* Remove background color change */
+    background-color: transparent !important;
+    color: var(--white) !important;
+}
+
+/* Keep original text color on hover */
+.table tbody tr:hover td,
+.table-hover tbody tr:hover td {
+    color: var(--white) !important;
+}
+
+/* Change outline buttons to solid buttons on table row hover */
+.table tbody tr:hover .btn-outline-primary,
+.table-hover tbody tr:hover .btn-outline-primary {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple-dark)) !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 20px rgba(172, 143, 254, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+.table tbody tr:hover .btn-outline-success,
+.table-hover tbody tr:hover .btn-outline-success {
+    background: linear-gradient(90deg, #4CAF50, #2E7D32) !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+.table tbody tr:hover .btn-outline-danger,
+.table-hover tbody tr:hover .btn-outline-danger {
+    background: linear-gradient(90deg, #F44336, #C62828) !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+.table tbody tr:hover .btn-outline-secondary,
+.table-hover tbody tr:hover .btn-outline-secondary {
+    background: rgba(110, 110, 128, 0.2) !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 20px rgba(110, 110, 128, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+.table tbody tr:hover .btn-outline-info,
+.table-hover tbody tr:hover .btn-outline-info {
+    background: linear-gradient(90deg, #03A9F4, #0288D1) !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 20px rgba(3, 169, 244, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+.table tbody tr:hover .btn-outline-warning,
+.table-hover tbody tr:hover .btn-outline-warning {
+    background: linear-gradient(90deg, #FFC107, #FF8F00) !important;
+    color: var(--black) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Add additional glow effect when hovering directly over the buttons */
+.table tbody tr:hover .btn-outline-primary:hover,
+.table-hover tbody tr:hover .btn-outline-primary:hover {
+    box-shadow: 0 8px 25px rgba(172, 143, 254, 0.5) !important;
+}
+
+.table tbody tr:hover .btn-outline-success:hover,
+.table-hover tbody tr:hover .btn-outline-success:hover {
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5) !important;
+}
+
+.table tbody tr:hover .btn-outline-danger:hover,
+.table-hover tbody tr:hover .btn-outline-danger:hover {
+    box-shadow: 0 8px 25px rgba(244, 67, 54, 0.5) !important;
+}
+
+.table tbody tr:hover .btn-outline-secondary:hover,
+.table-hover tbody tr:hover .btn-outline-secondary:hover {
+    box-shadow: 0 8px 25px rgba(110, 110, 128, 0.5) !important;
+}
+
+.table tbody tr:hover .btn-outline-info:hover,
+.table-hover tbody tr:hover .btn-outline-info:hover {
+    box-shadow: 0 8px 25px rgba(3, 169, 244, 0.5) !important;
+}
+
+.table tbody tr:hover .btn-outline-warning:hover,
+.table-hover tbody tr:hover .btn-outline-warning:hover {
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(25, 25, 25, 0.9);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(30, 30, 35, 0.7);
+}
+
+/* Form controls in tables */
+.form-control {
+    background: rgba(30, 30, 35, 0.7) !important;
+    color: var(--white) !important;
+    border: 1px solid rgba(172, 143, 254, 0.3) !important;
+}
+
+/* Input group styling */
+.input-group {
+    display: flex;
+    align-items: stretch;
+}
+
+.input-group .form-control,
+.input-group .input-group-text,
+.input-group .btn {
+    height: 38px; /* Consistent height for all elements */
+    display: flex;
+    align-items: center;
+}
+
+.input-group .btn {
+    background: rgba(172, 143, 254, 0.2) !important;
+    color: var(--white) !important;
+    border: 1px solid rgba(172, 143, 254, 0.3) !important;
+    padding: 0.375rem 0.75rem;
+}
+
+.input-group .btn:hover {
+    background: rgba(172, 143, 254, 0.3) !important;
+}
+
+.input-group .input-group-text {
+    background: rgba(172, 143, 254, 0.2) !important;
+    color: var(--white) !important;
+    border: 1px solid rgba(172, 143, 254, 0.3) !important;
+}
+
+/* Specific styles for env_vars table */
+.env-var-key {
+    color: var(--white) !important;
+    background-color: rgba(30, 30, 35, 0.7) !important;
+}
+
+.env-var-value {
+    color: var(--white) !important;
+    background-color: rgba(30, 30, 35, 0.7) !important;
+}
+
+/* Override any white backgrounds */
+.table, .table th, .table td,
+.table tbody, .table tbody tr,
+.table tbody tr td {
+    background-color: rgba(30, 30, 35, 0.7) !important;
+    color: var(--white) !important;
+}
+
+/* Override Bootstrap's table-primary class */
+.table-primary,
+.table-primary > th,
+.table-primary > td,
+tr.table-primary,
+tr.table-primary td {
+    background-color: rgba(30, 30, 35, 0.7) !important;
+    color: var(--white) !important;
+}
+
+/* Ensure table-primary doesn't change on hover */
+.table-hover tbody tr.table-primary:hover,
+.table-hover tbody tr.table-primary:hover td {
+    background-color: rgba(30, 30, 35, 0.7) !important;
+    color: var(--white) !important;
+}
+
+.table thead th {
+    background-color: rgba(172, 143, 254, 0.2) !important;
+    color: var(--white) !important;
+}
+
+/* Floating elements for visual interest */
+.floating-element {
+    position: absolute;
+    background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple-dark) 100%);
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(40px);
+    z-index: -1;
+}
+
+.floating-element.one {
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    right: -150px;
+    animation: float 15s ease-in-out infinite alternate;
+}
+
+.floating-element.two {
+    width: 200px;
+    height: 200px;
+    bottom: 10%;
+    left: -100px;
+    animation: float 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    justify-content: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .navbar-nav {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .section-heading {
+        font-size: 2rem;
+    }
+}
+
+/* Add Product Button Styling */
+/* Target all cta-buttons to ensure they display properly */
+a.cta-button {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Target specifically the Add Product button */
+a.cta-button[href*="add_product"] {
+    font-size: 1.15rem; /* Larger text */
+    font-weight: 500;
+}
+
+/* Make the plus icon smaller only in the Add Product button */
+a.cta-button[href*="add_product"] i.fas.fa-plus {
+    font-size: 0.75rem; /* Smaller plus symbol */
+    margin-right: 5px;
+}
+
+/* ========== ORIGINAL STYLE.CSS ========== */
+/* Custom styles for Product Manager */
+
+/* Note: Some styles from the original style.css may be redundant with vistiqx-theme.css.
+   They are included here for completeness and to ensure no functionality is lost. */
 
 footer {
     margin-top: auto;
@@ -42,7 +1153,7 @@ footer {
 }
 
 .collection-card {
-    border-left: 5px solid #007bff;
+    border-left: 5px solid rgba(172, 143, 254, 0.5);
 }
 
 .env-var-key {
@@ -113,7 +1224,7 @@ footer {
 }
 
 .section-heading {
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid rgba(172, 143, 254, 0.5);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
 }
@@ -128,7 +1239,7 @@ footer {
 .empty-state {
     text-align: center;
     padding: 3rem 1rem;
-    background-color: #f8f9fa;
+    background: rgba(25, 25, 25, 0.8);
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
 }

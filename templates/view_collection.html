@@ -5,26 +5,26 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="section-heading">{{ collection.name }}</h1>
-            <div>
-                <form action="{{ url_for('export_collection_to_shopify', id=collection.id) }}" method="post" class="d-inline">
+        <div class="mb-4">
+            <h1 class="section-heading mb-3">{{ collection.name }}</h1>
+            <div class="button-container">
+                <a href="{{ url_for('collections') }}" class="btn btn-secondary me-2">
+                    <i class="fas fa-arrow-left"></i> Back to Collections
+                </a>
+                <form action="{{ url_for('export_collection_to_shopify', id=collection.id) }}" method="post" class="d-inline-block me-2">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-success me-2">
+                    <button type="submit" class="btn btn-success">
                         <i class="fas fa-upload"></i> Export to Shopify
                     </button>
                 </form>
-                <a href="{{ url_for('edit_collection', id=collection.id) }}" class="btn btn-primary me-2">
+                <a href="{{ url_for('edit_collection', id=collection.id) }}" class="btn btn-primary">
                     <i class="fas fa-edit"></i> Edit Collection
-                </a>
-                <a href="{{ url_for('collections') }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back to Collections
                 </a>
             </div>
         </div>
         
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">
+            <div class="card-header text-white">
                 <h5 class="mb-0">Collection Details</h5>
             </div>
             <div class="card-body">
@@ -64,7 +64,7 @@
                         {% endif %}
                     </div>
                     <div class="col-md-4">
-                        <div class="card bg-light">
+                        <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Collection Info</h5>
                                 <ul class="list-unstyled">
@@ -89,7 +89,7 @@
             <div class="card-header bg-primary text-white">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Products in Collection</h5>
-                    <span class="badge bg-light text-dark">{{ products|default(collection.products)|length }} products</span>
+                    <span class="badge text-light">{{ products|default(collection.products)|length }} Product(s)</span>
                 </div>
             </div>
             <div class="card-body">
