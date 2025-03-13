@@ -5,16 +5,16 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="section-heading">Products</h1>
-            <div>
+        <div class="mb-4">
+            <h1 class="section-heading mb-3">Products</h1>
+            <div class="button-container">
                 <form action="{{ url_for('import_products_from_shopify') }}" method="post" class="d-inline me-2">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-success">
                         <i class="fas fa-download"></i> Import from Shopify
                     </button>
                 </form>
-                <a href="{{ url_for('add_product') }}" class="btn btn-primary">
+                <a href="{{ url_for('add_product') }}" class="cta-button">
                     <i class="fas fa-plus"></i> Add Product
                 </a>
             </div>
@@ -22,7 +22,7 @@
         
         {% if products %}
         <div class="card mb-4">
-            <div class="card-header bg-light">
+            <div class="card-header bg-primary text-white" style="background: var(--purple-light) !important;">
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <h5 class="mb-0">Product List</h5>
@@ -146,11 +146,33 @@
             <i class="fas fa-box-open"></i>
             <h3>No Products Yet</h3>
             <p>Get started by adding your first product.</p>
-            <a href="{{ url_for('add_product') }}" class="btn btn-primary">
+            <a href="{{ url_for('add_product') }}" class="cta-button">
                 <i class="fas fa-plus"></i> Add Product
             </a>
         </div>
         {% endif %}
+        
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white" style="background: var(--purple-light) !important;">
+                <h5 class="mb-0">About Products</h5>
+            </div>
+            <div class="card-body">
+                <p style="color: var(--white);">Products are the items you sell in your Shopify store. You can manage your products here, including adding tags and organizing them into collections.</p>
+                
+                <h6 class="mt-4" style="color: var(--white);">Product Features:</h6>
+                <ul style="color: var(--white);">
+                    <li>Add and edit product details</li>
+                    <li>Auto-tag products with Claude 3.7</li>
+                    <li>Organize products into collections</li>
+                    <li>Import and export products to Shopify</li>
+                </ul>
+                
+                <div class="alert alert-info mt-3" style="background: rgba(172, 143, 254, 0.1); border-color: rgba(172, 143, 254, 0.3); color: var(--white);">
+                    <h6 style="color: var(--white);"><i class="fas fa-lightbulb"></i> Tip</h6>
+                    <p style="color: var(--white);">Use the "Auto-Tag All" button to automatically generate tags for your products using Claude 3.7's AI capabilities.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

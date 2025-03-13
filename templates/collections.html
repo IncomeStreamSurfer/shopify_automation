@@ -5,9 +5,9 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="section-heading">Collections</h1>
-            <div>
+        <div class="mb-4">
+            <h1 class="section-heading mb-3">Collections</h1>
+            <div class="button-container">
                 <a href="{{ url_for('add_collection') }}" class="btn btn-success me-2">
                     <i class="fas fa-plus"></i> Add Collection
                 </a>
@@ -49,7 +49,7 @@
             {% for collection in collections %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100 collection-card">
-                    <div class="card-header bg-success text-white">
+                    <div class="card-header text-white">
                         <h5 class="mb-0">{{ collection.name }}</h5>
                     </div>
                     <div class="card-body">
@@ -148,7 +148,7 @@
             <i class="fas fa-layer-group"></i>
             <h3>No Collections Yet</h3>
             <p>Collections help you organize your products based on tags.</p>
-            <div class="mt-3">
+            <div class="mt-3 button-container">
                 <a href="{{ url_for('add_collection') }}" class="btn btn-success me-2">
                     <i class="fas fa-plus"></i> Create Collection
                 </a>
@@ -181,29 +181,29 @@
         {% endif %}
         
         <div class="card mt-4">
-            <div class="card-header bg-success text-white">
+            <div class="card-header bg-primary text-white" style="background: var(--purple-light) !important;">
                 <h5 class="mb-0">About Collections</h5>
             </div>
             <div class="card-body">
-                <p>Collections are groups of products organized by tags. You can create collections manually or automatically from tags.</p>
+                <p style="color: var(--white);">Collections are groups of products organized by tags. You can create collections manually or automatically from tags.</p>
                 
-                <h6 class="mt-4">Types of Collections:</h6>
-                <ul>
+                <h6 class="mt-4" style="color: var(--white);">Types of Collections:</h6>
+                <ul style="color: var(--white);">
                     <li><strong>Smart Collections</strong> - Automatically include all products with a specific tag. When new products are tagged, they're automatically added to the collection.</li>
                     <li><strong>Regular Collections</strong> - Manually curated collections where you choose which products to include.</li>
                 </ul>
                 
-                <h6 class="mt-4">Collection Features:</h6>
-                <ul>
+                <h6 class="mt-4" style="color: var(--white);">Collection Features:</h6>
+                <ul style="color: var(--white);">
                     <li>Group products by tags</li>
                     <li>Automatically create collections from tags</li>
                     <li>Organize your product catalog</li>
                     <li>Create custom collections with selected products</li>
                 </ul>
                 
-                <div class="alert alert-info mt-3">
-                    <h6><i class="fas fa-lightbulb"></i> Tip</h6>
-                    <p>Use the "Create from Tags" button to automatically create smart collections for all your tags. This is a quick way to organize your products, and new products with those tags will automatically appear in the collections.</p>
+                <div class="alert alert-info mt-3" style="background: rgba(172, 143, 254, 0.1); border-color: rgba(172, 143, 254, 0.3); color: var(--white);">
+                    <h6 style="color: var(--white);"><i class="fas fa-lightbulb"></i> Tip</h6>
+                    <p style="color: var(--white);">Use the "Create from Tags" button to automatically create smart collections for all your tags. This is a quick way to organize your products, and new products with those tags will automatically appear in the collections.</p>
                 </div>
             </div>
         </div>
